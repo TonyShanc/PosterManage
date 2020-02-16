@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <p>{{ msg }}</p>
+    <p>{{ target }}</p>
+    <p>{{ img_name }}</p>
+    <!--img v-bind:src="img_url"-->
+    <form id="login-form">
+        姓名<input v-model="name" placeholder="edit me">
+        <br>
+        密码<input v-model="password" placeholder="edit me">
+        <button v-on:click="send">登录</button>
+    </form>
+    <p>{{ name }}</p>
+    <p>{{ password }}</p>
+    <P>{{ m }}</P>
+</div>
+</body>
+<script src="https://unpkg.com/vue"></script>
+<script>
+     const API_PROXY = 'https://bird.ioliu.cn/v1/?url='
+    let app = new  Vue ({
+        el: "#app",
+        data:{
+            msg: "单超",
+            target: "test",
+            img_name: String,
+            img_url: String,
+            name: "",
+            password: "",
+            m: ""
+        },
+        methods:{
+          send: function () {
+              let url='localhost:9090/api/login';
+              alert(url);
+              fetch(url, {
+                  method: 'POST',
+                  body:{name: this.name, password: this.password},
+                  headers: {
+                      "Content-type": "application/json",
+                      token: "f4c902c9ae5a2a9d8f84868ad064e706"
+                  }
+              }).then(res=>{
+                  console.log(res)
+                  alert(res)
+                  res.json().then(data=>{
+                      this.m = data.password
+                      alert(data.password)
+                  })
+              })
+              alert("haah");
+              }
+
+        },
+        mounted() {
+            fetch(API_PROXY + 'http://180.160.54.129:2333/api/film_name/大话西游',{method: 'GET'})
+                .then(res=>{
+                    res.json().then(data => {
+                        this.img_name = data.film_name
+                        this.img_url = data.url
+                    })
+                })
+        }
+    })
+</script>
+</html>

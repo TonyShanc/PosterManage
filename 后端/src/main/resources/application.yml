@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test
+  mvc:
+      static-path-pattern: /**
+      view:
+        suffix: .html
+        prefix: /page/
+
+  resources:
+    static-locations: file:F://JAVA项目//mongo//src//main//resources//static/
