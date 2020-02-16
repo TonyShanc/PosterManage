@@ -2,7 +2,3 @@
 	数据库：mongoDB
 	java框架：springboot
 	安全框架：spring security
-
-Model中许多类是为了对应前端发送的json数据格式而建立的，user images imageViewTime才对应数据库的表。
-所有的映射和处理方法在apiController中。Springsecurity配置在SecurityConfiguration中，两个handler类用于权限处理返回自定义json替代spring security的默认页面。
-
